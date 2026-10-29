@@ -2,8 +2,11 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
 import { useColorScheme } from "nativewind";
 import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { colors } from "../constants/theme";
 import "../global.css";
 import { AuthProvider, useAuth } from "../providers/AuthProvider";
@@ -19,6 +22,10 @@ function RootNavigator() {
   useEffect(() => {
     if (!loading) SplashScreen.hideAsync();
   }, [loading]);
+
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(c.surface);
+  }, [c.surface]);
 
   if (loading) return null;
 
@@ -64,10 +71,14 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <RootNavigator />
-      </AuthProvider>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider>
+        <AuthProvider>
+          <KeyboardProvider>
+            <RootNavigator />
+          </KeyboardProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

@@ -1,0 +1,9 @@
+
+#	RPC Name	Signature	Used In	Purpose
+1	is_admin()	() → boolean	All *_admin_* RLS policies	Returns true if auth.uid() belongs to a user whose role is admin.
+2	add_order_timeline(...)	(p_order_id bigint, p_notes text, p_status text) → void	lib/orders.ts	Inserts a row into order_timeline. Works for guest + logged-in. Bypasses the owner-scoped order_timeline_insert_own policy.
+3	get_order_by_number(...)	(p_order_number text, p_email text) → jsonb	hooks/useOrderByNumber.ts	Fetches a full order + timeline by order number, verifying billing_email matches. Works for guest + logged-in. Bypasses orders_select_own.
+4	validate_promo_code(...)	(p_code text, p_subtotal numeric) → jsonb	hooks/useValidatePromoCode.ts	Validates a promo code server-side (active, not expired, usage limit, min order). Works for anon. Bypasses promo_codes_admin_all.
+5	submit_survey(...)	(p_token text, p_rating_overall int, p_rating_installation int, p_rating_technicians int, p_comments_installation text, p_comments_technicians text, p_comments_additional text, p_would_recommend boolean) → jsonb	hooks/useSubmitSurvey.ts	Validates + updates a review via survey_token. Marks expired if past token_expires_at, marks completed otherwise, and inserts into order_timeline. Works for anon. Bypasses reviews_update_own.
+6	validate_survey_token(...)	(p_token text) → jsonb	hooks/useValidateSurveyToken.ts	Validates a survey link (status, expiry). Returns { review: { id, order_number, customer_name, email }, expires_at } on success. Flips status to expired if past token_expires_at. Works for anon. Bypasses reviews_select_own.
+7	confirm_order_install_date(...)	(p_order_number text, p_email text) → jsonb	hooks/useConfirmOrderInstallDate.ts

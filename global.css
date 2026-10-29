@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Custom Colors - These will override shadcn */
+  --custom-primary: #1c2d58;
+  --custom-secondary: #f49321;
+  --custom-accent: #d6d7d8;
+  --custom-pinkbanner: #ec008c;
+  --custom-blue: #90d3eb;
+
+  --custom-primary-contrast: #1c2d58;
+  --custom-secondary-contrast: #f49321;
+  --custom-white-primary: #ffffff;
+  --custom-primary-white: #1c2d58 /* Background & Foreground */
+    --background: #ffffff;
+  --foreground: #1c2d58;
+  --background-secondary: #f8f9fa;
+  --border-color: #d6d7d8;
+}
+
+.dark {
+  /* Custom Colors - Darker versions that align with primary */
+  --custom-primary: #1a2a4d;
+  --custom-secondary: #d4851e;
+  --custom-accent: #2a2a2a;
+  --custom-pinkbanner: #d4007a;
+  --custom-blue: #90d3eb;
+
+  --custom-primary-contrast: #f49321;
+  --custom-secondary-contrast: #1c2d58;
+
+  --custom-white-primary: #1c2d58;
+  --custom-primary-white: #ffffff;
+
+  --foreground: #d6dce8;
+  --background-secondary: #152340;
+  --border-color: #2a3d68;
+}
+
+@theme {
+  /* Custom Colors */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-pinkbanner: var(--custom-pinkbanner);
+  --color-accent-blue: var(--custom-blue);
+  --color-accent-2: var(--accent-2);
+
+  --color-primary-contrast: var(--custom-primary-contrast);
+  --color-secondary-contrast: var(--custom-secondary-contrast);
+
+  --color-white-primary: var(--custom-white-primary);
+  --color-primary-white: var(--custom-primary-white);
+
+  /* Background & Foreground */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-secondary: var(--background-secondary);
+  --color-border: var(--border-color);
+
+  /* Font Families */
+  --font-poppins: "Poppins", sans-serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-trelasty: "Trelasty Betanny", cursive;
+  --font-greattong: "Greattong Brush", cursive;
+  --font-acier: "Acier Bat", sans-serif;
+}

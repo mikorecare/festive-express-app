@@ -11,8 +11,38 @@
       "bundleIdentifier": "com.festiveexpress.app",
       "supportsTablet": true
     },
-    "android": { "package": "com.festiveexpress.app" },
-    "plugins": ["expo-router", "expo-splash-screen"],
-    "experiments": { "typedRoutes": true }
+    "android": {
+      "package": "com.festiveexpress.app",
+      "icon": "./assets/images/icon.png",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "softwareKeyboardLayoutMode": "resize"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#FFFFFF"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "d6141c29-f949-4806-a4a9-7aaeec325e39"
+      }
+    },
+    "owner": "mikorecares-team"
   }
 }

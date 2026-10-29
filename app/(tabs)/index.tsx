@@ -1,39 +1,52 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { Body, Button, Card, H1, Screen } from "@/components/ui";
-import { useAuth } from "@/providers/AuthProvider";
+import { CartButton } from "@/components/cart/CartButton";
+import {
+  ChooseYourPackage,
+  HowItWorks,
+  Reviews,
+  VideoTestimonials,
+} from "@/components/home";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
+import { Body, H1, Screen } from "@/components/ui";
+import { UserMenu } from "@/components/UserMenu";
+import { useCart } from "@/providers/CartProvider";
 import { Text, View } from "react-native";
 
 export default function Home() {
-  const { session, signOut } = useAuth();
+  const { count, open } = useCart();
 
   return (
-    <Screen>
-      <View className="gap-1">
-        <Body>Welcome,</Body>
-        <H1>{session?.user.email ?? "Guest"}</H1>
-      </View>
+    <View style={{ flex: 1 }}>
+      <Screen>
+        <View className="flex-row items-start justify-between">
+          <View className="flex-1 gap-1 pr-3">
+            <Body>Welcome,</Body>
+            <H1>Mahiwagang Sahod</H1>
+          </View>
 
-      <View className="mt-6 rounded-3xl bg-brand p-6 dark:bg-brand-dark">
-        <Text className="text-2xl font-extrabold text-white">
-          Celebrate, delivered.
-        </Text>
-        <Text className="mt-2 text-base text-white/90">
-          Browse our packages and let Festive Express handle the rest.
-        </Text>
-      </View>
+          <View className="flex-row items-center gap-2">
+            <CartButton count={count} onPress={open} />
+            <UserMenu />
+          </View>
+        </View>
 
-      <Text className="mb-2 mt-8 text-lg font-bold text-ink dark:text-ink-dark">
-        Appearance
-      </Text>
-      <ThemeToggle />
+        <View className="mt-2 rounded-md bg-brand p-6 dark:bg-brand-dark">
+          <Text className="text-2xl font-extrabold text-white">
+            Holiday Decorating rentals, right from your device.
+          </Text>
+          <Text className="mt-3 text-base font-semibold text-white/90">
+            Giftwrapped in One Simple Package.
+          </Text>
+          <Text className="mt-1 text-sm text-white/75">
+            No ladders. No tangled cords. No storage. No stress.
+          </Text>
+        </View>
 
-      <Card className="mt-8">
-        <Text className="text-base font-semibold text-ink dark:text-ink-dark">
-          Account
-        </Text>
-        <Body className="mb-4">Signed in with Supabase.</Body>
-        <Button variant="outline" title="Sign out" onPress={signOut} />
-      </Card>
-    </Screen>
+        <HowItWorks />
+        <ChooseYourPackage />
+        <Reviews />
+        <VideoTestimonials />
+        <WhyChooseUs />
+      </Screen>
+    </View>
   );
 }
